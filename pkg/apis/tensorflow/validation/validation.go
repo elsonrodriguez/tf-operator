@@ -66,6 +66,12 @@ func ValidateTFJobSpec(c *tfv1.TFJobSpec) error {
 				break
 			}
 		}
+		for _, c := range r.Template.Spec.InitContainers {
+			if c.Name == string(tfv1.TENSORFLOW) {
+				found = true
+				break
+			}
+		}
 		if !found {
 			return fmt.Errorf("Replica type %v is missing a container named %v", r.TFReplicaType, tfv1.TENSORFLOW)
 		}
