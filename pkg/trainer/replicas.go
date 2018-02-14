@@ -220,7 +220,7 @@ func (s *TFReplicaSet) Create(config *tfv1alpha1.ControllerConfig) error {
 		for i, _ := range newJ.Spec.Template.Spec.InitContainers {
 			// We can't get c in the loop variable because that would be by value so our modifications
 			// wouldn't have any effect.
-			c := &newJ.Spec.Template.Spec.Containers[i]
+			c := &newJ.Spec.Template.Spec.InitContainers[i]
 			if tfv1alpha1.ContainerName(c.Name) != tfv1alpha1.TENSORFLOW {
 				continue
 			}
